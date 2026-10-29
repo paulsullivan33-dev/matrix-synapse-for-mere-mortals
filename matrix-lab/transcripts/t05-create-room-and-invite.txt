@@ -1,0 +1,21 @@
+
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/createRoom -H 'Authorization: Bearer <alice>' -d '{...}'
+  {"name":"The Hobby Club","topic":"A test room for the lab",
+   "preset":"private_chat","room_alias_name":"hobby-club"}
+{
+  "room_id": "!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg"
+}
+
+
+$ curl -s http://127.0.0.1:8008/_matrix/client/v3/directory/room/%23hobby-club%3Alab.local
+{
+  "room_id": "!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg",
+  "servers": [
+    "lab.local"
+  ]
+}
+
+
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/invite -d '{"user_id":"@bob:lab.local"}'   (as alice)
+{}
+(empty JSON object = success)

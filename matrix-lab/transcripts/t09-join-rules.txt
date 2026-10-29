@@ -1,0 +1,27 @@
+
+$ curl -s .../rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/state/m.room.join_rules -H 'Authorization: Bearer <alice>'
+{
+  "join_rule": "invite"
+}
+
+
+$ curl -s -X PUT .../rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/state/m.room.join_rules -d '{"join_rule":"public"}'   (alice)
+{
+  "event_id": "$i6H3fz0rtsKmjsH1u7T2QLThpyDMmeHNna3TgMdTais"
+}
+
+
+$ # read back:
+{
+  "join_rule": "public"
+}
+
+# ...and put it back to invite-only, the safer default:
+
+$ curl -s -X PUT .../state/m.room.join_rules -d '{"join_rule":"invite"}'   (alice)
+{
+  "event_id": "$joCAjWs_KdV9XEjweNCVA3V6HfRNp8x1ZXfR6VN0NMU"
+}
+{
+  "join_rule": "invite"
+}

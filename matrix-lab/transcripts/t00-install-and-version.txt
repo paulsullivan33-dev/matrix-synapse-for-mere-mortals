@@ -1,0 +1,7 @@
+$ pip install matrix-synapse   (into a fresh venv)
+Name: matrix-synapse
+Version: 1.164.1
+Summary: Homeserver for the Matrix decentralised comms protocol
+
+$ python -c "import synapse; print(synapse.__version__)"
+1.164.1

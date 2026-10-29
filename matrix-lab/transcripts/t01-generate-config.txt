@@ -1,0 +1,26 @@
+$ python -m synapse.app.homeserver --server-name lab.local \
+    --config-path homeserver.yaml --data-directory . \
+    --generate-config --report-stats=no
+Generating config file homeserver.yaml
+Generating signing key file lab.local.signing.key
+
+Key lines of the generated config (grep):
+12:server_name: "lab.local"
+15:  - bind_addresses:
+18:    port: 8008
+22:      - client
+27:  name: sqlite3
+39:report_stats: false
+44:  - server_name: "matrix.org"
+
+Lab edits made by hand:
+  * listener resources: removed "- federation" (client API only; federation stays off)
+19:    resources:
+20-    - compress: false
+21-      names:
+22-      - client
+23-    tls: false
+  * appended at the end of the file:
+37:enable_registration: true
+38:enable_registration_without_verification: true
+39-report_stats: false

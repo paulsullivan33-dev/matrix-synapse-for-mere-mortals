@@ -1,0 +1,29 @@
+# Everything the lab's server owns, on disk:
+
+$ ls -la (the homeserver data directory)
+total 6384
+drwxrwx--- 1 root root        434 Oct 29 18:57 .
+drwxrwx--x 1 root nogroup   16338 Oct 29 18:58 ..
+-rw-r----- 1 root root    2228224 Oct 29 18:54 homeserver.db
+-rw-r----- 1 root root      32768 Oct 29 18:58 homeserver.db-shm
+-rw-r----- 1 root root    4128272 Oct 29 18:58 homeserver.db-wal
+-rw-rw---- 1 root root      99724 Oct 29 18:58 homeserver.log
+-rw-rw---- 1 root root       1727 Oct 29 18:53 homeserver.yaml
+-rw-rw---- 1 root root       2746 Oct 29 18:53 lab.local.log.config
+-rw-r----- 1 root root         59 Oct 29 18:53 lab.local.signing.key
+drwxrwx--- 1 root root          0 Oct 29 18:54 media_store
+
+$ du -h homeserver.db; file homeserver.db
+2.2M	/home/hatch/workspace/matrix-lab-work/homeserver.db
+/home/hatch/workspace/matrix-lab-work/homeserver.db: SQLite 3.x database, last written using SQLite version 3045001, writer version 2, read version 2, file counter 3, database pages 544, 1st free page 344, free pages 1, cookie 0x205, schema 4, UTF-8, version-valid-for 3
+
+$ ls media_store/   (uploads would live here; the lab sent text only)
+total 4
+drwxrwx--- 1 root root   0 Oct 29 18:54 .
+drwxrwx--- 1 root root 434 Oct 29 18:57 ..
+
+# The two files that ARE the server's identity and memory:
+#   lab.local.signing.key — lose it and other servers stop
+#     trusting this one; homeserver.db — every user, room
+#     and message the server knows. Back up both, plus the
+#     config. Sizes above are after 3 users and 2 rooms.

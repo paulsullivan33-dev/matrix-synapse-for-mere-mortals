@@ -1,0 +1,15 @@
+
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/register -d '{}'   # step 1: ask how to prove ourselves
+{"session":"TQJRVSjHcSGnLXQOCuKLbEks","flows":[{"stages":["m.login.dummy"]}],"params":{}}
+HTTP 401
+
+# The server answered 401 with a session id and the flows it accepts.
+# The lab completes the 'm.login.dummy' stage using that session:
+
+$ curl -s -X POST .../register -d '{"username":"alice","password":"AlicePass!234","auth":{"type":"m.login.dummy","session":"<session from step 1>"}}'
+{
+  "user_id": "@alice:lab.local",
+  "home_server": "lab.local",
+  "access_token": "syt_YWxpY2U_sWtXpOuzmNWDCHHhjzJR_02vdq1",
+  "device_id": "ECOUEWNTPC"
+}

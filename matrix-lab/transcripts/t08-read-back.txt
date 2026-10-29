@@ -1,0 +1,16 @@
+
+$ curl -s 'http://127.0.0.1:8008/_matrix/client/v3/rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/messages?dir=b&limit=10' -H 'Authorization: Bearer <bob>'
+[
+  {
+    "sender": "@bob:lab.local",
+    "body": "Hello Alice — I can see the room."
+  },
+  {
+    "sender": "@alice:lab.local",
+    "body": "Hello Bob — the club room is open."
+  }
+]
+
+# The same two messages in the order they were sent:
+@alice:lab.local: Hello Bob — the club room is open.
+@bob:lab.local: Hello Alice — I can see the room.

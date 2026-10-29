@@ -1,0 +1,32 @@
+
+$ # bob registers the same way (session dance condensed)
+{
+  "user_id": "@bob:lab.local",
+  "home_server": "lab.local"
+}
+
+
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/login -d '{"type":"m.login.password","identifier":{"type":"m.id.user","user":"@alice:lab.local"},"password":"AlicePass!234"}'
+{
+  "user_id": "@alice:lab.local",
+  "home_server": "lab.local",
+  "device_id": "BKCRPSWIEG",
+  "access_token": "syt_YWxpY2U_..."
+}
+
+
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/login   (bob, same shape)
+{
+  "user_id": "@bob:lab.local",
+  "home_server": "lab.local",
+  "device_id": "DXMAKLEINC",
+  "access_token": "syt_Ym9i_Qoi..."
+}
+
+
+$ curl -s http://127.0.0.1:8008/_matrix/client/v3/account/whoami -H 'Authorization: Bearer <alice token>'
+{
+  "user_id": "@alice:lab.local",
+  "is_guest": false,
+  "device_id": "ECOUEWNTPC"
+}

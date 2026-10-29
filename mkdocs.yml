@@ -1,0 +1,26 @@
+site_name: Matrix (Synapse) for Mere Mortals
+site_description: Running your own Matrix chat server with Synapse. What a homeserver is, how rooms and federation work, registering your first users, setting permissions, and keeping the database healthy, with the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/matrix-synapse-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What Matrix Is: what-matrix-is.md
+  - The Moving Parts: the-moving-parts.md
+  - Installing Synapse: installing-synapse.md
+  - Your First Users: your-first-users.md
+  - Rooms and Permissions: rooms-and-permissions.md
+  - Choosing a Client: choosing-a-client.md
+  - Federation — Opening the Doors: federation-and-opening-up.md
+  - Media, Retention and the Database: media-and-database-care.md
+  - Recipes: recipes.md
+  - The Neighbours: the-neighbours.md
+  - Limits: limits.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

@@ -1,0 +1,13 @@
+
+$ curl -s -X POST .../login   (alice, WRONG password)
+{"errcode":"M_FORBIDDEN","error":"Invalid username or password"}
+HTTP 403
+
+$ # registering the same username a second time:
+{"errcode":"M_USER_IN_USE","error":"User ID already taken."}
+HTTP 400
+
+
+$ # a message to a room that does not exist:
+{"errcode":"M_FORBIDDEN","error":"User @alice:lab.local not in room !nosuchroom:lab.local"}
+HTTP 403

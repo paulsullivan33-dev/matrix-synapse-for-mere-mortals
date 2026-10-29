@@ -1,0 +1,30 @@
+
+$ curl -s .../rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/state/m.room.power_levels -H 'Authorization: Bearer <alice>'   (excerpt)
+{
+  "users": {},
+  "users_default": 0,
+  "events": 8,
+  "state_default": 50,
+  "invite": 0,
+  "kick": 50,
+  "ban": 50
+}
+
+
+$ # alice promotes bob to moderator (power level 50) and reads it back:
+
+$ curl -s -X PUT .../state/m.room.power_levels -d '<the same document, with @bob:lab.local: 50 added to users>'
+{
+  "event_id": "$BtMBwILf5VzaHhgUUDHE_B-sXOmLecLRHc3BNZNeloM"
+}
+{
+  "@bob:lab.local": 50
+}
+
+# Why is alice's own name missing from the users map above?
+# The room's create event names her as creator; on the current
+# room version that is where the creator's power level lives.
+$ curl -s .../rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/state/m.room.create -H 'Authorization: Bearer <alice>'
+{
+  "room_version": "12"
+}

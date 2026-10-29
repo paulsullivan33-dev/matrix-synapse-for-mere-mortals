@@ -1,0 +1,13 @@
+
+$ PUT .../rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/send/m.room.message/txn1   (alice)
+  {"msgtype":"m.text","body":"Hello Bob — the club room is open."}
+{
+  "event_id": "$21lA4-bgUgTUPWRbWq1yoe7RasaokPRal1Fb3x7rLvk"
+}
+
+
+$ PUT .../rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/send/m.room.message/txn2   (bob)
+  {"msgtype":"m.text","body":"Hello Alice — I can see the room."}
+{
+  "event_id": "$kJ5udheTSUcBqKU-3SRVQa_5q_1mz6qML74bu6cBgd0"
+}

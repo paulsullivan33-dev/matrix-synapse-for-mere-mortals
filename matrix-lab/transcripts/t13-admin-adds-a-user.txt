@@ -1,0 +1,41 @@
+# With public registration closed, an admin adds users with
+# the shared secret from homeserver.yaml. The endpoint first
+# hands out a one-time nonce; the answer is an HMAC of the
+# nonce and the new account's details, keyed by the secret.
+# (The secret itself is not printed; it never leaves the server.)
+
+$ curl -s http://127.0.0.1:8008/_synapse/admin/v1/register
+{
+  "nonce": "ac75759306cbdc4c70a071b8ed2bbd5b2d21e772c9a2de853fff60f220e42312941b2775a2c2c9c1da1a36c48a7891e6128ba0f0399fba6aa571850fa68402b4"
+}
+
+# The signed message is the fields joined by NUL bytes, ending
+# in the word 'admin' or 'notadmin'. (The lab checked an
+# older write-up that said 'user' — the server answered
+# 'HMAC incorrect'. The word below is the one Synapse
+# 1.164.1 accepts, read from its own source.)
+$ python3 -c '<hmac-sha1 over nonce NUL carol NUL password NUL notadmin, keyed by the shared secret>'
+mac = a73ce221406f1f1535efbcc501b8e23afdcc49b4   (computed locally; proves we hold the secret)
+
+$ curl -s -X POST http://127.0.0.1:8008/_synapse/admin/v1/register -d '{"nonce":"<nonce>","username":"carol","password":"CarolPass!567","admin":false,"mac":"<mac>"}'
+{
+  "user_id": "@carol:lab.local",
+  "home_server": "lab.local",
+  "access_token": "syt_Y2Fyb2w_QQwdGQpoKMlXpGZwSMPJ_0JwPdF",
+  "device_id": "DLWKIKWUDW"
+}
+
+# Carol's first login attempt was refused — not by her
+# password, but by Synapse's login rate limit, which the lab's
+# earlier failed logins from this same address had tripped:
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/login -d '{...carol...}'
+{"errcode":"M_LIMIT_EXCEEDED","error":"Too Many Requests","retry_after_ms":92670}
+
+# After the wait it asked for, the same login succeeds — no
+# open registration was needed at any point:
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/login -d '{...carol...}'
+{
+  "user_id": "@carol:lab.local",
+  "home_server": "lab.local",
+  "device_id": "FPPAGYZVHD"
+}

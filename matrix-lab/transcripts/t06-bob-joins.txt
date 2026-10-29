@@ -1,0 +1,33 @@
+
+# The invitation itself, arriving in bob's /sync, is captured
+# in t06b-the-invite-arriving.txt (on a second room, so the
+# moment could be shown cleanly). Here bob accepts the invite
+# to The Hobby Club:
+
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/join/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg -d '{}'   (as bob)
+{
+  "room_id": "!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg"
+}
+
+
+$ curl -s http://127.0.0.1:8008/_matrix/client/v3/joined_rooms -H 'Authorization: Bearer <bob>'
+{
+  "joined_rooms": [
+    "!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg"
+  ]
+}
+
+
+$ curl -s http://127.0.0.1:8008/_matrix/client/v3/rooms/!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg/joined_members -H 'Authorization: Bearer <alice>'
+{
+  "joined": {
+    "@alice:lab.local": {
+      "avatar_url": null,
+      "display_name": "alice"
+    },
+    "@bob:lab.local": {
+      "avatar_url": null,
+      "display_name": "bob"
+    }
+  }
+}

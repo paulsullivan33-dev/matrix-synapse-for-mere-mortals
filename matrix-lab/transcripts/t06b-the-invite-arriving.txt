@@ -1,0 +1,48 @@
+# A second room ('The Garden Shed') was created by alice so
+# the invite could be seen arriving in bob's sync.
+# Bob is invited to it and has not yet joined.
+
+$ curl -s 'http://127.0.0.1:8008/_matrix/client/v3/sync?timeout=0&full_state=true' -H 'Authorization: Bearer <bob>'   (excerpt)
+{
+  "invited_rooms": [
+    "!FxxV4_i7hlcTN_ef-eA7ruzlt63FL8FoJoXfGVMczIQ"
+  ],
+  "joined_rooms": [
+    "!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg"
+  ]
+}
+
+# The invitation itself, as the sync delivers it — the room's
+# name and alice's invite, which is all a client needs to show
+# 'alice invited you to The Garden Shed':
+{
+  "type": "m.room.name",
+  "sender": "@alice:lab.local",
+  "name": "The Garden Shed",
+  "membership": null
+}
+{
+  "type": "m.room.member",
+  "sender": "@alice:lab.local",
+  "name": null,
+  "membership": "join"
+}
+{
+  "type": "m.room.member",
+  "sender": "@alice:lab.local",
+  "name": null,
+  "membership": "invite"
+}
+
+$ curl -s -X POST http://127.0.0.1:8008/_matrix/client/v3/join/!FxxV4_i7hlcTN_ef-eA7ruzlt63FL8FoJoXfGVMczIQ -d '{}'   (as bob)
+{
+  "room_id": "!FxxV4_i7hlcTN_ef-eA7ruzlt63FL8FoJoXfGVMczIQ"
+}
+
+$ curl -s http://127.0.0.1:8008/_matrix/client/v3/joined_rooms -H 'Authorization: Bearer <bob>'
+{
+  "joined_rooms": [
+    "!MvRSxCPghox--9v33vm6GHee9eraBdJaVfa4mUBI-fg",
+    "!FxxV4_i7hlcTN_ef-eA7ruzlt63FL8FoJoXfGVMczIQ"
+  ]
+}

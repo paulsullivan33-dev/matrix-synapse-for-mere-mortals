@@ -1,0 +1,43 @@
+
+$ curl -s http://127.0.0.1:8008/_matrix/client/versions | jq .
+{
+  "versions": [
+    "r0.0.1",
+    "r0.1.0",
+    "r0.2.0",
+    "r0.3.0",
+    "r0.4.0",
+    "r0.5.0",
+    "r0.6.0",
+    "r0.6.1",
+    "v1.1",
+    "v1.2",
+    "v1.3",
+    "v1.4",
+    "v1.5",
+    "v1.6",
+    "v1.7",
+    "v1.8",
+    "v1.9",
+    "v1.10",
+    "v1.11",
+    "v1.12",
+    "v1.13",
+    "v1.14",
+    "v1.15",
+    "v1.16",
+    "v1.17"
+  ],
+  "unstable_features": 40
+}
+
+
+$ curl -s http://127.0.0.1:8008/   (the root page)
+
+<html>
+    <head>
+        <meta http-equiv="refresh" content="0;URL=/_matrix/static">
+    </head>
+    <body bgcolor="#FFFFFF" text="#000000">
+    <a href="/_matrix/static">click here</a>
+    </body>
